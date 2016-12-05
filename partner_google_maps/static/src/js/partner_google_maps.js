@@ -175,7 +175,7 @@ var CustomView = View.extend({
 			  	mapTypeId : google.maps.MapTypeId.TERRAIN,
 			  	mapTypeControl: false
 			});
-
+			
 			var infowindow = new google.maps.InfoWindow();
 
 			var marker, i;

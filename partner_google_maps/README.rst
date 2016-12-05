@@ -22,7 +22,10 @@ Then go to your odoo web interface to the module section and start "Apps >> Upda
 Configuration
 =============
 
-.. figure:: usage.png
+Setup Google Maps Center & Zoom
+=======
+
+.. figure:: Selection_077.png
    :alt: Input Usage
    :scale: 80 %
    :align: center
