@@ -1,0 +1,20 @@
+<template>
+    <div t-name="CustomView" class="erp_custom_view">
+    	    	
+    </div>
+    
+    <div t-name="CustomView.sample.1">
+    	<h1><t t-esc="template_data.a"></t></h1>
+    	<table style="width:100%">
+    		<tr>
+    			<t t-foreach="action" t-as="act">
+    				<td width="50%">
+    					<h2><t t-esc="act['string']"></t></h2>
+    					<div t-att-action-id="act['id']"></div>
+    				</td>
+    			</t> 
+    		</tr>    		
+    	</table>
+    </div>
+
+</template>
