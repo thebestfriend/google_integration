@@ -1,17 +1,15 @@
 =======================
-Integer Range Widget
+Partner Google Maps
 =======================
-This project aims to create integer range for input
+This project aims to allow user can view all partner's locations on google maps inside Odoo's view
 
 Contact
 =======
 
-- Linkedin: tuan-nguyen
+- Linkedin: https://www.linkedin.com/in/tuan-nguyen-90191271
 - Skype: **the.bestfriends**
 - Email: **tuannguyen36.vn@gmail.com**
 
-
-.. _tuan-nguyen: https://www.linkedin.com/in/tuan-nguyen-90191271
 
 Installation
 ============

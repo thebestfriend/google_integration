@@ -10,10 +10,6 @@
                 <field name="ref" position="after">
                     <field name="is_display_gm"/>
                 </field>
-                <!-- <field name="country_id" position="after">
-                    <field name="g_lat"/>
-                    <field name="g_lng"/>
-                </field> -->
             </field>
         </record>
         

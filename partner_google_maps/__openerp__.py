@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Copyright (C) 2016- TUANNGUYEN36.VN@GMAIL.COM
-#    @author tuan-nguyen (https://www.linkedin.com/in/tuan-nguyen-90191271)
+#    @author TuanNguyen (https://www.linkedin.com/in/tuan-nguyen-90191271)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -25,11 +25,8 @@
     'author': "tuannguyen36.vn@gmail.com",
     'category': 'Extra Tools',
     'description': """
-This module aims to display google maps for partners
+This project aims to allow user can view all partner's locations on google maps inside Odoo's view
     """,
-    'price': 128,
-    'currency': 'EUR',
-    'license': 'OPL-1',
     'depends': ['base', 'web'],
     'data': [
         'data/ir_config_parameter_data.xml',
