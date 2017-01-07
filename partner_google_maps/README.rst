@@ -23,7 +23,7 @@ Configuration
 Setup Google Maps Center & Zoom
 =======
 
-.. figure:: Selection_077.png
+.. figure:: static/description/Selection_077.png
    :alt: Input Usage
    :scale: 80 %
    :align: center
