@@ -47,7 +47,7 @@ Select to display partner's map or not
    
 View partner's Google Maps
 =======
-.. figure:: Selection_081.png
+.. figure:: static/description/Selection_081.png
    :alt: Input Usage
    :scale: 80 %
    :align: center
