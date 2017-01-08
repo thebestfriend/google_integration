@@ -1,14 +1,8 @@
-=======================
+==============
 Partner Google Maps
-=======================
+==============
+
 This project aims to allow user can view all partner's locations on google maps inside Odoo's view
-
-Contact
-=======
-
-- Linkedin: https://www.linkedin.com/in/tuan-nguyen-90191271
-- Skype: **the.bestfriends**
-- Email: **tuannguyen36.vn@gmail.com**
 
 
 Installation
@@ -53,8 +47,15 @@ Select to display partner's map or not
    
 View partner's Google Maps
 =======
-.. figure:: static/description/Selection_081.png
+.. figure:: Selection_081.png
    :alt: Input Usage
    :scale: 80 %
    :align: center
    :figclass: text-center
+
+Contact
+=======
+
+- Linkedin: https://www.linkedin.com/in/tuan-nguyen-90191271
+- Skype: **the.bestfriends**
+- Email: **tuannguyen36.vn@gmail.com**
