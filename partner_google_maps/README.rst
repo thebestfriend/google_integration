@@ -23,13 +23,13 @@ Configuration
 Setup Google Maps Center & Zoom
 =======
 
-.. figure:: static/description/Selection_077.png
+.. figure:: partner_google_maps/static/description/Selection_077.png
    :alt: Input Usage
    :scale: 80 %
    :align: center
    :figclass: text-center
    
-.. figure:: static/description/Selection_078.png
+.. figure:: partner_google_maps/static/description/Selection_078.png
    :alt: Input Usage
    :scale: 80 %
    :align: center
@@ -37,15 +37,15 @@ Setup Google Maps Center & Zoom
    
 Create a new partner and fill the address
 =======
-.. figure:: static/description/Selection_079.png
+.. figure:: partner_google_maps/static/description/Selection_079.png
    :alt: Input Usage
-   :scale: 80 %
+   :scale: 80 %c
    :align: center
    :figclass: text-center
    
 Select to display partner's map or not
 =======
-.. figure:: static/description/Selection_080.png
+.. figure:: partner_google_maps/static/description/Selection_080.png
    :alt: Input Usage
    :scale: 80 %
    :align: center
@@ -53,7 +53,7 @@ Select to display partner's map or not
    
 View partner's Google Maps
 =======
-.. figure:: static/description/Selection_081.png
+.. figure:: partner_google_maps/static/description/Selection_081.png
    :alt: Input Usage
    :scale: 80 %
    :align: center

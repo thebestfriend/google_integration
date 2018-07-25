@@ -33,16 +33,29 @@ var CustomView = View.extend({
     display_name: _lt('Google Maps'),
     icon: 'fa fa-map-marker',
     view_type: "custom",
-    _model: null,
+    //_model: null,
+    // model: null,
 
-    init: function(parent, dataset, view_id, options) {
+/*    init: function(parent, dataset, view_id, options) {
         var self = this;
         this._super(parent);
         this.set_default_options(options);
         this.dataset = dataset;
         this.view_id = view_id;
-        this._model = new Model(this.dataset.model);
+        this.model = new Model(this.dataset.model);
+        //this._model = new Model(this.dataset.model);
+        this._model = this.model;
+    },*/
+
+    init: function(parent, dataset, fields_view, options) {
+        this._super(parent);
+        this.ViewManager = parent;
+        this.dataset = dataset;
+        this.model = dataset.model;
+        this.fields_view = fields_view;
+        this.options = _.defaults({}, options, this.defaults);
     },
+
 
     view_loading: function(r) {
         return this.load_custom_view(r);

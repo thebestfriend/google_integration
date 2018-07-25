@@ -21,11 +21,13 @@
 
 import geocoder
 
-from openerp import api, models, fields
+from odoo import api, models, fields
 
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
+
+    is_display_gm = fields.Boolean('Display Google Maps?')
 
     @api.depends('street', 'street2', 'city', 'state_id',
                  'state_id.name', 'country_id', 'country_id.name', 'zip')
@@ -34,8 +36,9 @@ class ResPartner(models.Model):
             address = record._get_address()
             if address:
                 g = geocoder.google(address).latlng
-                record.g_lat = g[0]
-                record.g_lng = g[1]
+                if g:
+                    record.g_lat = g[0]
+                    record.g_lng = g[1]
 
     def _get_address(self):
         address = []
@@ -54,7 +57,7 @@ class ResPartner(models.Model):
 
         return ', '.join(address)
 
-    is_display_gm = fields.Boolean('Display Google Maps?')
+
     g_lat = fields.Float(
         compute='_compute_glatlng', string='G Latitude', store=True,
         multi='glatlng')
