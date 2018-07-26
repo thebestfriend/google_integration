@@ -8,9 +8,11 @@ odoo.define('partner_google_maps.CustomView', function (require) {
 
 var core = require('web.core');
 var data = require('web.data');
+var data_manager = require('web.data_manager');
+var pyeval = require('web.pyeval');
 var Model = require('web.DataModel');
 var View = require('web.View');
-var pyeval = require('web.pyeval');
+
 var ActionManager = require('web.ActionManager');
 
 var _t = core._t;
@@ -33,29 +35,18 @@ var CustomView = View.extend({
     display_name: _lt('Google Maps'),
     icon: 'fa fa-map-marker',
     view_type: "custom",
-    //_model: null,
-    // model: null,
+    _model: null,
 
-/*    init: function(parent, dataset, view_id, options) {
+    init: function(parent, dataset, view_id, options) {
         var self = this;
-        this._super(parent);
-        this.set_default_options(options);
+        this._super(parent, dataset, view_id, options);
+        // Uncaught TypeError: this.set_default_options is not a function
+        // this.set_default_options(options);
         this.dataset = dataset;
+        console.log('My dataset is =' + dataset);
         this.view_id = view_id;
-        this.model = new Model(this.dataset.model);
-        //this._model = new Model(this.dataset.model);
-        this._model = this.model;
-    },*/
-
-    init: function(parent, dataset, fields_view, options) {
-        this._super(parent);
-        this.ViewManager = parent;
-        this.dataset = dataset;
-        this.model = dataset.model;
-        this.fields_view = fields_view;
-        this.options = _.defaults({}, options, this.defaults);
+        this._model = new Model(this.dataset.model);
     },
-
 
     view_loading: function(r) {
         return this.load_custom_view(r);
@@ -74,7 +65,7 @@ var CustomView = View.extend({
         var template_data = this.fields_view.arch.attrs.template_data;
         //get list action
         var actions = [];
-        var action_full = [];        
+        var action_full = [];
         for(var i in this.fields_view.arch.children){
         	if(this.fields_view.arch.children[i].tag != 'action'){
         		continue;
@@ -88,45 +79,45 @@ var CustomView = View.extend({
 			var $this = $(QWeb.render(template_name, {
 				template_data: data,
 				action: actions,
-				toFixed: toFixed			
+				toFixed: toFixed
 			}));
 			this.$el.empty().append($this);
-			//get and append action data			
+			//get and append action data
 			for(var i in action_full){
-				this.on_get_action(action_full[i]);			
+				this.on_get_action(action_full[i]);
 			}
-			//trigger			
+			//trigger
 			$(window).trigger('view_custom.reloaded', [{view: self, data: data, $this: $this}]);
-		}; 
+		};
 		if(template_data){
 			self._model.call(template_data, [this.domain, this.context]).then(function(data, status){
-				callback.call(self, data);		
+				callback.call(self, data);
 			});
 		}else{
 			callback.call(self, {});
 		};
     },
-    
+
     on_get_action: function(action){
     	var self = this;
     	var action_id = _.str.toNumber(action.attrs.name);
         if (!_.isNaN(action_id)) {
-            self.rpc('/web/action/load', {action_id: action_id}).done(function(result) {            	
+            self.rpc('/web/action/load', {action_id: action_id}).done(function(result) {
                 self.on_load_action(result, action.attrs);
             });
         };
     },
-    
+
     on_load_action: function(result, action_attrs) {
         var self = this,
-            action = result;            
+            action = result;
 
         // evaluate action_attrs context and domain
         action_attrs.context = pyeval.eval(
             'context', action_attrs.context || {});
         action_attrs.domain = pyeval.eval(
             'domain', action_attrs.domain || [], action_attrs.context);
-        
+
         if (action_attrs.context['custom_merge_domains_contexts'] === false) {
             // TODO: replace this 6.1 workaround by attribute on <action/>
             action.context = action_attrs.context || {};
@@ -138,7 +129,7 @@ var CustomView = View.extend({
                 'domains', [action_attrs.domain, action.domain || [], this.domain || []],
                 action.context)
         }
-        
+
         action.flags = {
             search_view : false,
             sidebar : false,
@@ -151,8 +142,8 @@ var CustomView = View.extend({
                 selectable: false
             }
         };
-        
-        var am = new ActionManager(this),            
+
+        var am = new ActionManager(this),
             $action = this.$el.find('*[action-id="'+action_attrs.id+'"]');
         // $action.parent().data('action_attrs', action_attrs);
         // this.action_managers.push(am);
@@ -163,7 +154,7 @@ var CustomView = View.extend({
             // self.do_action(action);
         // };
     },
-    
+
     do_search: function(domain, context, group_by) {
         this.domain = domain;
         this.context = context;
@@ -172,12 +163,12 @@ var CustomView = View.extend({
         this.load_custom_view(this.fields_view);
         this.funcDisplayGoogleMaps(this.domain);
     },
-    
+
     do_show: function() {
         this.do_push_state({});
         return this._super();
     },
-    
+
     funcDisplayGoogleMaps: function(domain){
     	this._model.call('get_google_maps_data', [domain]).then(function(results){
 			var locations = results[0];
@@ -188,7 +179,7 @@ var CustomView = View.extend({
 			  	mapTypeId : google.maps.MapTypeId.TERRAIN,
 			  	mapTypeControl: false
 			});
-			
+
 			var infowindow = new google.maps.InfoWindow();
 
 			var marker, i;
@@ -198,7 +189,7 @@ var CustomView = View.extend({
 			  		position : new google.maps.LatLng(locations[i][1], locations[i][2]),
 			  		map : map
 			  	});
-			
+
 			  	google.maps.event.addListener(marker, 'click', (function(marker, i) {
 			  		return function() {
 			  			infowindow.setContent(locations[i][0]);

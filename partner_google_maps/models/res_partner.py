@@ -32,10 +32,11 @@ class ResPartner(models.Model):
     @api.depends('street', 'street2', 'city', 'state_id',
                  'state_id.name', 'country_id', 'country_id.name', 'zip')
     def _compute_glatlng(self):
+        # key = self.env['ir.config_parameter'].get_param('Google_Maps_User_Key')
         for record in self:
             address = record._get_address()
             if address:
-                g = geocoder.google(address).latlng
+                g = geocoder.google(address, key='AIzaSyDVws0_U97KYYtn-R2OSsWf3RIy-2_JG_M').latlng
                 if g:
                     record.g_lat = g[0]
                     record.g_lng = g[1]
@@ -78,8 +79,8 @@ class ResPartner(models.Model):
 
         # get google maps center configuration
         IC = self.env['ir.config_parameter']
-        gm_c_lat = float(IC.get_param('Google_Maps_Center_Latitude'))
-        gm_c_lng = float(IC.get_param('Google_Maps_Center_Longitude'))
-        gm_zoom = int(IC.get_param('Google_Maps_Zoom'))
+        gm_c_lat = 51.26  # float(IC.get_param('Google_Maps_Center_Latitude'))
+        gm_c_lng = 4.40  # float(IC.get_param('Google_Maps_Center_Longitude'))
+        gm_zoom = 10  # int(IC.get_param('Google_Maps_Zoom'))
 
         return locations, (gm_c_lat, gm_c_lng, gm_zoom)
