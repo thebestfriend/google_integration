@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-    <data noupdate="1">
-        
-        <record id="gm_center_lat" model="ir.config_parameter">
-            <field name="key">Google_Maps_Center_Latitude</field>
-            <field name="value">10.80</field>
-        </record>
-        
-        <record id="gm_center_lng" model="ir.config_parameter">
-            <field name="key">Google_Maps_Center_Longitude</field>
-            <field name="value">106.85</field>
-        </record>
-        
-        <record id="gm_zoom" model="ir.config_parameter">
-            <field name="key">Google_Maps_Zoom</field>
-            <field name="value">10</field>
-        </record>
-        
-    </data>
-    
-</openerp>
+<odoo noupdate="1">
+
+    <record id="gm_center_lat" model="ir.config_parameter">
+        <field name="key">Google_Maps_Center_Latitude</field>
+        <field name="value">50.85</field>
+    </record>
+
+    <record id="gm_center_lng" model="ir.config_parameter">
+        <field name="key">Google_Maps_Center_Longitude</field>
+        <field name="value">4.348</field>
+    </record>
+
+    <record id="gm_zoom" model="ir.config_parameter">
+        <field name="key">Google_Maps_Zoom</field>
+        <field name="value">10</field>
+    </record>
+
+    <record id="gm_api_key" model="ir.config_parameter">
+        <field name="key">Google_Maps_API_Key</field>
+        <field name="value">AIzaSyDVws0_U97KYYtn-R2OSsWf3RIy-2_JG_M</field>
+    </record>
+
+</odoo>
