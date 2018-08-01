@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
 #    Copyright (C) 2016- TUANNGUYEN36.VN@GMAIL.COM
 #    @author TuanNguyen (https://www.linkedin.com/in/tuan-nguyen-90191271)
 #

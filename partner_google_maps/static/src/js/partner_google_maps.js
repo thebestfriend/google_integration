@@ -43,7 +43,6 @@ var CustomView = View.extend({
         // Uncaught TypeError: this.set_default_options is not a function
         // this.set_default_options(options);
         this.dataset = dataset;
-        console.log('My dataset is =' + dataset);
         this.view_id = view_id;
         this._model = new Model(this.dataset.model);
     },
@@ -189,7 +188,7 @@ var CustomView = View.extend({
 			  		position : new google.maps.LatLng(locations[i][1], locations[i][2]),
 			  		map : map
 			  	});
-
+                console.log('location: marker['+ i + ']=' + locations[i][0]);
 			  	google.maps.event.addListener(marker, 'click', (function(marker, i) {
 			  		return function() {
 			  			infowindow.setContent(locations[i][0]);

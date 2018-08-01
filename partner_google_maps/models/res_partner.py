@@ -19,9 +19,10 @@
 #
 ##############################################################################
 
+import logging
 import geocoder
-
 from odoo import api, models, fields
+_logger = logging.getLogger(__name__)
 
 
 class ResPartner(models.Model):
@@ -32,11 +33,11 @@ class ResPartner(models.Model):
     @api.depends('street', 'street2', 'city', 'state_id',
                  'state_id.name', 'country_id', 'country_id.name', 'zip')
     def _compute_glatlng(self):
-        # key = self.env['ir.config_parameter'].get_param('Google_Maps_User_Key')
+        key = self.env['ir.config_parameter'].get_param('Google_Maps_API_Key')
         for record in self:
             address = record._get_address()
             if address:
-                g = geocoder.google(address, key='AIzaSyDVws0_U97KYYtn-R2OSsWf3RIy-2_JG_M').latlng
+                g = geocoder.google(address, key=key).latlng
                 if g:
                     record.g_lat = g[0]
                     record.g_lng = g[1]
@@ -70,39 +71,43 @@ class ResPartner(models.Model):
     def get_location_widget(self):
         self.ensure_one()
         web_base = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
-        content_string = (
-            '<div class="oe_kanban_global_click o_res_partner_kanban o_kanban_record">'
-            '<div class="o_kanban_tags_section oe_kanban_partner_categories">'
-            '<span class="oe_kanban_list_many2many">'
-            '<div name="category_id" can_create="true" can_write="true" modifiers="{}" class=" oe_form_field o_form_field_many2manytags o_kanban_tags"></div>'
-            '</span>'
-            '</div>'
-            '<div class="o_kanban_image" style="float: left;text-align: center;">'
-            '<img src="%s/web/image?model=res.partner&amp;field=image_small&amp;id=%d&amp;unique=20180725215223" style="margin-left: 8px; max-width: 100&percnt;;">'
-            '</div>'
-            '<div class="oe_kanban_details">'
-            '<strong class="oe_partner_heading">%s, %s</strong>'
-            '<ul>'
-            '<li>%s</li>'
-            '<li>%s</li>'
-            '<li>%s, %s</li>'
-            '<li class="o_text_overflow">%s</li>'
-            '</ul>'
-            '<div class="oe_kanban_partner_links">'
-            '</div>'
-            '</div>'
-            '</div>' % (
-                web_base,
-                self.id,
-                self.parent_id.name if self.parent_id else '',
-                self.name or '',
-                self.function if self.function else '',
-                self.street or '',
-                self.city or '',
-                self.country_id.name if self.country_id else '',
-                self.email if self.email else ''
-            )
+        u_name = "%s%s%s" % (
+            self.parent_id.name if self.parent_id else '',
+            ', ' if self.parent_id and self.name else '',
+            self.name if self.name else '')
+        u_function = '<li>' + self.function + '</li>' if self.function else ''
+        u_street = '<li>' + self.street + '</li>' if self.street  else ''
+        u_city = '<li>' + self.city + '</li>' if self.city else ''
+        u_country = '<li>' + self.country_id.name + '</li>' if self.country_id else ''
+        u_email = '<li>' + self.email + '</li>' if self.email else ''
+        u_phone = '<li>' + self.phone + '</li>' if self.phone else ''
+        content_string = '''<div>
+                <div style="float: left;text-align: center; padding-left: px;">
+                <img src="%s/web/image?model=res.partner&amp;field=image_small&amp;id=%d" style="margin-left: 8px; max-width: 100%%;padding-top: 20px;">
+                </div>'
+                <div style="padding-left: 42px; font-size:13px;">
+                <strong style="padding: 10px">%s</strong>
+                <ul style="list-style-type: none; margin-top: 0;">
+                %s
+                %s
+                %s
+                %s
+                %s
+                %s
+                </ul>
+                </div>
+                </div>''' % (
+            web_base,
+            self.id,
+            u_name,
+            u_function,
+            u_street,
+            u_city,
+            u_country,
+            u_email,
+            u_phone
         )
+
         return content_string
 
     @api.model
@@ -118,8 +123,8 @@ class ResPartner(models.Model):
 
         # get google maps center configuration
         IC = self.env['ir.config_parameter']
-        gm_c_lat = 51.26  # float(IC.get_param('Google_Maps_Center_Latitude'))
-        gm_c_lng = 4.40  # float(IC.get_param('Google_Maps_Center_Longitude'))
-        gm_zoom = 10  # int(IC.get_param('Google_Maps_Zoom'))
+        gm_c_lat = float(IC.get_param('Google_Maps_Center_Latitude'))  # 51.26
+        gm_c_lng = float(IC.get_param('Google_Maps_Center_Longitude'))  # 4.40
+        gm_zoom = int(IC.get_param('Google_Maps_Zoom'))  # 10
 
         return locations, (gm_c_lat, gm_c_lng, gm_zoom)
