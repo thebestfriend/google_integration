@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
 #    Copyright (C) 2016- TUANNGUYEN36.VN@GMAIL.COM
 #    @author TuanNguyen (https://www.linkedin.com/in/tuan-nguyen-90191271)
 #
@@ -21,20 +19,21 @@
 
 {
     'name': 'Partner Google Maps',
-    'version': '9.0.1.0',
+    'version': '10.0.1.0.0',
     'author': "tuannguyen36.vn@gmail.com",
     'category': 'Extra Tools',
-    'description': """
-This project aims to allow user can view all partner's locations on google maps inside Odoo's view
-    """,
-    'depends': ['base', 'web'],
+    'summary': "view all partner location on google maps",
+    'depends': [
+        'base',
+        'web'],
     'data': [
         'data/ir_config_parameter_data.xml',
         'views/partner_google_maps_templates.xml',
         'views/res_partner_view.xml'
     ],
     'qweb': [
-        'static/src/xml/*.xml',
+        'static/src/xml/custom_view.xml',
+        'static/src/xml/partner_google_maps.xml',
     ],
     'active': False,
     'installable': True,
