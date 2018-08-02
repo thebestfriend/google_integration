@@ -68,7 +68,7 @@ class ResPartner(models.Model):
         multi='glatlng')
 
     @api.multi
-    def get_location_widget(self):
+    def get_location_widget(self, form_name='base.action_partner_form'):
         self.ensure_one()
         web_base = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
         u_name = "%s%s%s" % (
@@ -81,8 +81,10 @@ class ResPartner(models.Model):
         u_country = '<li>' + self.country_id.name + '</li>' if self.country_id else ''
         u_email = '<li>' + self.email + '</li>' if self.email else ''
         u_phone = '<li>' + self.phone + '</li>' if self.phone else ''
-        action_id = self.env['ir.model.data'].xmlid_to_res_id('contacts.action_contacts')
-        menu_id = self.env['ir.model.data'].xmlid_to_res_id('contacts.menu_contacts')
+        # in Sales - base.action_partner_form - (default)
+        # in Contacts - contacts.action_contacts
+        action_id = self.env['ir.model.data'].xmlid_to_res_id(form_name)
+        menu_id = self.env['ir.model.data'].xmlid_to_res_id(form_name)
         content_string = '''<div>
                 <div style="float: left;text-align: center; padding-left: px;">
                 <img src="%s/web/image?model=res.partner&amp;field=image_small&amp;id=%d" style="margin-left: 8px; max-width: 100%%;padding-top: 20px;">
@@ -117,14 +119,14 @@ class ResPartner(models.Model):
         return content_string
 
     @api.model
-    def get_google_maps_data(self, domain=[]):
+    def get_google_maps_data(self, domain=[], form_name='base.action_partner_form'):
         # get all partners need to display google maps
         domain.append(('is_display_gm', '=', True))
         partners = self.search(domain)
         locations = []
         for partner in partners:
             location = [
-                partner.get_location_widget(), partner.g_lat, partner.g_lng, partner.id]
+                partner.get_location_widget(form_name), partner.g_lat, partner.g_lng, partner.id]
             locations.append(location)
 
         # get google maps center configuration

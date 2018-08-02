@@ -169,7 +169,7 @@ var CustomView = View.extend({
     },
 
     funcDisplayGoogleMaps: function(domain){
-    	this._model.call('get_google_maps_data', [domain]).then(function(results){
+    	this._model.call('get_google_maps_data', [domain], ).then(function(results){
 			var locations = results[0];
 			var gm_configs = results[1];
 			var map = new google.maps.Map(document.getElementById('map'), {
@@ -188,7 +188,6 @@ var CustomView = View.extend({
 			  		position : new google.maps.LatLng(locations[i][1], locations[i][2]),
 			  		map : map
 			  	});
-                console.log('location: marker['+ i + ']=' + locations[i][0]);
 			  	google.maps.event.addListener(marker, 'click', (function(marker, i) {
 			  		return function() {
 			  			infowindow.setContent(locations[i][0]);

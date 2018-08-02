@@ -26,8 +26,5 @@
         <field name="view_mode">kanban,tree,form,custom</field>
     </record>
 
-    <!-- in Contacts > Contacts -->
-    <record id="contacts.action_contacts" model="ir.actions.act_window">
-        <field name="view_mode">kanban,tree,form,custom</field>
-    </record>
+
 </odoo>
