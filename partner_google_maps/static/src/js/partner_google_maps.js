@@ -29,6 +29,17 @@ function toFixed(num, digits){
 	return num.toFixed(digits);
 }
 
+function getUrlParameter(sParam) {
+    var url = window.location.href;
+    var url_search = url.replace(/^.*[#?]+/, '');
+    var sURLVariables = url_search.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) {
+            return sParameterName[1];
+        }
+    }
+}
 
 var CustomView = View.extend({
 	template: "CustomView",
@@ -169,7 +180,10 @@ var CustomView = View.extend({
     },
 
     funcDisplayGoogleMaps: function(domain){
-    	this._model.call('get_google_maps_data', [domain], ).then(function(results){
+        var form_name = 'base';
+        var menu_id = getUrlParameter('menu_id');
+        var action_id = getUrlParameter('action');
+    	this._model.call('get_google_maps_data', [domain, menu_id, action_id]).then(function(results){
 			var locations = results[0];
 			var gm_configs = results[1];
 			var map = new google.maps.Map(document.getElementById('map'), {

@@ -2,7 +2,7 @@
 Contacts Google Maps
 =======================
 
-This modules allows partners location to be displayed on Google Map in Odoo Contacts view.
+This modules allow extends ``contacts`` by adding a toggle-able view allowing partners to be displayed in Google Map.
 
 Installation notes
 ===================
@@ -21,7 +21,7 @@ Maintainer
 -----------
 
 .. image:: http://www.abakusitsolutions.eu/wp-content/themes/abakus/images/logo.gif
-    :alt: AbAKUS IT SOLUTIONS
+   :alt: AbAKUS IT SOLUTIONS
    :target: http://www.abakusitsolutions.eu
 
 This module is maintained by AbAKUS IT SOLUTIONS
