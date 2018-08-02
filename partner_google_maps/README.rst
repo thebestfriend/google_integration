@@ -9,7 +9,7 @@ Installation notes
 
 
 Set Google Maps Center, Zoom Level and Google Map API key
-------------
+---------------------------------------------------------
 
 .. figure:: static/description/Selection_077.png
    :alt: Input Usage
@@ -24,15 +24,15 @@ Set Google Maps Center, Zoom Level and Google Map API key
    :figclass: text-center
    
 Create a new partner and fill the address
-------------
+-----------------------------------------
 .. figure:: static/description/Selection_079.png
    :alt: Input Usage
-   :scale: 80 %c
+   :scale: 80 %
    :align: center
    :figclass: text-center
    
 Select to display partner's map or not
-------------
+--------------------------------------
 .. figure:: static/description/Selection_080.png
    :alt: Input Usage
    :scale: 80 %
@@ -40,7 +40,7 @@ Select to display partner's map or not
    :figclass: text-center
    
 View partner's Google Maps
-------------
+--------------------------
 .. figure:: static/description/Selection_081.png
    :alt: Input Usage
    :scale: 80 %
