@@ -28,7 +28,7 @@ _logger = logging.getLogger(__name__)
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    is_display_gm = fields.Boolean('Display Google Maps?')
+    is_display_gm = fields.Boolean('Display Google Maps?', default=True)
 
     @api.depends('street', 'street2', 'city', 'state_id',
                  'state_id.name', 'country_id', 'country_id.name', 'zip')
@@ -81,12 +81,14 @@ class ResPartner(models.Model):
         u_country = '<li>' + self.country_id.name + '</li>' if self.country_id else ''
         u_email = '<li>' + self.email + '</li>' if self.email else ''
         u_phone = '<li>' + self.phone + '</li>' if self.phone else ''
+        action_id = self.env['ir.model.data'].xmlid_to_res_id('contacts.action_contacts')
+        menu_id = self.env['ir.model.data'].xmlid_to_res_id('contacts.menu_contacts')
         content_string = '''<div>
                 <div style="float: left;text-align: center; padding-left: px;">
                 <img src="%s/web/image?model=res.partner&amp;field=image_small&amp;id=%d" style="margin-left: 8px; max-width: 100%%;padding-top: 20px;">
                 </div>'
                 <div style="padding-left: 42px; font-size:13px;">
-                <strong style="padding: 10px">%s</strong>
+                <strong style="padding: 10px"><a href="%s/web?#id=%d&view_type=form&model=res.partner&menu_id=%d&action=%d" style="color: black; text-decoration: none;">%s</a></strong>
                 <ul style="list-style-type: none; margin-top: 0;">
                 %s
                 %s
@@ -99,6 +101,10 @@ class ResPartner(models.Model):
                 </div>''' % (
             web_base,
             self.id,
+            web_base,
+            self.id,
+            action_id,
+            menu_id,
             u_name,
             u_function,
             u_street,
