@@ -7,6 +7,17 @@ This modules allows partners location to be displayed on  Google Map in Odoo.
 Installation notes
 ===================
 
+This Odoo version can not load dynamically Google Maps API from Google site.
+
+The workaround goes as follow:
+
+1. wget https://maps.googleapis.com/maps/api/js?key=<API_KEY>&amp;callback=initMap
+
+2. dump this file in the gapi.js file.
+
+3. repackage and release
+
+
 Set Google Maps Center, Zoom Level and Google Map API key
 ---------------------------------------------------------
 
