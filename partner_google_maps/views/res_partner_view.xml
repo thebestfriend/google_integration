@@ -1,32 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-    <data>
-        
-        <record id="view_res_partner_form_inherit" model="ir.ui.view">
-            <field name="name">view.res.partner.form.inherit</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_form"/>
-            <field name="arch" type="xml"> 
-                <field name="ref" position="after">
-                    <field name="is_display_gm"/>
-                </field>
-            </field>
-        </record>
-        
-        <record id="view_res_partner_custom_inherit" model="ir.ui.view">
-            <field name="name">view.res.partner.custom.inherit</field>
-            <field name="model">res.partner</field>
-            <field name="arch" type="xml">
-                <custom string="Google Maps"                  
-                    template_name="partner_google_maps.partner_google_maps">                                 
-                </custom>
-            </field>
-        </record>
-        
-        <record id="base.action_partner_form" model="ir.actions.act_window">
-            <field name="view_mode">kanban,tree,form,custom</field>
-        </record>
-        
-    </data>
-    
-</openerp>
+<odoo>
+    <record id="view_res_partner_form_inherit" model="ir.ui.view">
+        <field name="name">view.res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='ref']" position="after">
+                <field name="is_display_gm"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_res_partner_custom_inherit" model="ir.ui.view">
+        <field name="name">view.res.partner.custom.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <custom string="Google Maps"
+                    template_name="partner_google_maps.partner_google_maps">
+            </custom>
+        </field>
+    </record>
+
+    <!-- in Sales > Customers -->
+    <record id="base.action_partner_form" model="ir.actions.act_window">
+        <field name="view_mode">kanban,tree,form,custom</field>
+    </record>
+
+
+</odoo>
